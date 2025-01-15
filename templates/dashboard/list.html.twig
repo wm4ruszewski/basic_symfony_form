@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block body %}
+    <div class="container-wide">
+        {% if messages|length > 0 %}
+            <div class="list-header"> Liczba wysłanych przez formularz wiadomości wynosi:
+                <strong>{{ messages|length }}</strong>.
+            </div>
+            <div class="flex row list-row">
+                <div class="list-item">Imię</div>
+                <div class="list-item">Nazwisko</div>
+                <div class="list-item wide">Załącznik</div>
+                <div class="list-item">Data wysłania</div>
+            </div>
+            {% for message in messages %}
+                <div class="flex row list-row">
+                    <div class="list-item">{{ message.name }}</div>
+                    <div class="list-item">{{ message.lastname }}</div>
+                    <div class="list-item wide">{% if message.filename %}
+                            <img src="{{ asset('uploads/' ~ message.filename) }}" alt="Plik użytkownika">
+                        {% endif %}</div>
+                    <div class="list-item">{{ message.createdAt|date('Y-m-d H:i:s') }}</div>
+                </div>
+            {% endfor %}
+            <div class="flex row bottom-nav">
+                {% if previous >= 0 %}
+                    <a href="{{ path('app_list', { offset: previous }) }}" class="prev">Poprzednie</a>
+                {% endif %}
+                {% if next < messages|length %}
+                    <a href="{{ path('app_list', { offset: next }) }}" class="nex">Następne</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <div> Nie wysłano jeszcze żadnej wiadomości.</div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block footer %}
+    <div class="container">
+        <form action="{{ path('app_logout') }}" method="post">
+            <button type="submit" class="button logout">Wyloguj</button>
+        </form>
+    </div>
+{% endblock %}

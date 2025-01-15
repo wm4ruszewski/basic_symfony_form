@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Form
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'class': 'flex col'}}) }}
+    <div class="container">
+        <div>
+            {% for field in form %}
+                {% if field.vars.name != '_token' and field.vars.name != 'send' %}
+                    <div class="form-group">
+                        <div class="label">{{ form_label(field) }}</div>
+                        <div class="error">{{ form_errors(field, {'attr': {'class': 'error'}}) }}</div>
+                        <div class="field">{{ form_widget(field) }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            {{ form_widget(form.send, {'attr': {'class': 'button'}}) }}
+        </div>
+        {% if sent_status is defined and sent_status %}
+            <p class="success">Wysłano pomyślnie</p>
+        {% endif %}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
