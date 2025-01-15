@@ -7,7 +7,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 
 ## Uwagi
 
-- Całość jest postawiona na standardowym obrazie dockera dla Symfony 7.1
+- Całość jest postawiona na standardowym obrazie dockera dla Symfony 7.2
 - PHP 8.3 jest w kontenerze `php`.
 - Podłączona jest baza Postgres. Jest dostępna w kontenerze `database`. Użytkownik to `app`, hasła nie ma.
 - Uzytkownicy zostali roboczo wpisani w `UserProvider`. Nie chciałem przesyłać dodatkowo bazy danych, bo tam się powinny znaleźć ich dane.
